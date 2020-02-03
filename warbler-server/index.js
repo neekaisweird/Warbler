@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
+const messagesRoutes = require('./routes/messages');
 
 const PORT = 8080;
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/users/:id/messages', messagesRoutes);
 
 app.use(function(req, res, next) {
   let err = new Error('Not Found');

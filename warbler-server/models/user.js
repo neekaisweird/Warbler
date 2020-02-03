@@ -18,7 +18,13 @@ const userSchema = new mongoose.Schema({
   },
   profileImageUrl: {
     type: String
-  }
+  },
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Message'
+    }
+  ]
 });
 
 //before each save, run this function for hashing the password
