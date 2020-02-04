@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import errors from '../store/reducers/errors';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -24,15 +25,29 @@ class AuthForm extends Component {
       console.log('logged in successfully!');
     });
   };
+
   render() {
     const { email, username, password, profileImageUrl } = this.state;
-    const { heading, signUp, buttonText } = this.props;
+    const {
+      heading,
+      signUp,
+      buttonText,
+      errors,
+      history,
+      removeError
+    } = this.props;
+    history.listen(() => {
+      removeError();
+    });
     return (
       <div>
         <div className="row justify-content-md-center text-center">
           <div className="col-md-6">
             <form onSubmit={this.handleSubmit}>
               <h2>{heading}</h2>
+              {errors.message && (
+                <div className="alert alert-danger">{errors.message}</div>
+              )}
               <label htmlFor="email">Email:</label>
               <input
                 className="form-control"
