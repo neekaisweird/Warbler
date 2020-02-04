@@ -17,7 +17,13 @@ class AuthForm extends Component {
       [e.target.name]: e.target.value
     });
   };
-
+  handleSubmit = e => {
+    e.preventDefault();
+    const authType = this.props.signUp ? 'signup' : 'login';
+    this.props.onAuth(authType, this.state).then(() => {
+      console.log('logged in successfully!');
+    });
+  };
   render() {
     const { email, username, password, profileImageUrl } = this.state;
     const { heading, signUp, buttonText } = this.props;
@@ -57,6 +63,7 @@ class AuthForm extends Component {
                   />
                   <label htmlFor="image-url">Image URL:</label>
                   <input
+                    autoComplete="off"
                     className="form-control"
                     id="image-url"
                     name="profileImageUrl"
@@ -66,6 +73,12 @@ class AuthForm extends Component {
                   />
                 </div>
               )}
+              <button
+                type="submit"
+                className="btn btn-primary btn-block btn-lg"
+              >
+                {buttonText}
+              </button>
             </form>
           </div>
         </div>

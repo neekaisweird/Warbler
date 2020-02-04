@@ -6,8 +6,8 @@ const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
 const messagesRoutes = require('./routes/messages');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
-
-const PORT = 8080;
+const db = require('./models');
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
