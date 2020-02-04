@@ -3,10 +3,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
 import AuthForm from '../components/AuthForm';
-import MessageForm from '../components/MessageForm';
+import MessageForm from '../containers/MessageForm';
+import withAuth from '../hocs/withAuth';
 import { authUser } from '../store/actions/auth';
 import { removeError } from '../store/actions/errors';
-import withAuth from '../hocs/withAuth';
 
 const Main = props => {
   const { authUser, errors, removeError, currentUser } = props;
@@ -52,7 +52,6 @@ const Main = props => {
           }}
         />
         <Route
-          exact
           path="/users/:id/messages/new"
           component={withAuth(MessageForm)}
         />
